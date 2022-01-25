@@ -1,6 +1,9 @@
 import { useState } from "react";
-import ReactMapGL, { Marker, Popup } from "react-map-gl";
-import { useEffect } from "react/cjs/react.development";
+import ReactMapGL, {
+  Popup,
+  NavigationControl,
+  ScaleControl,
+} from "react-map-gl";
 import * as mapData from "../../fetchApi.json";
 // import marker from "../../image/marker.svg";
 // import marker from "../../image/car.svg";
@@ -10,6 +13,7 @@ import VehicleDescr from "../VehicleDescr";
 import styles from "./VehicleMap.module.css";
 
 const vehicleData = mapData;
+
 const VehicleMap = () => {
   const [viewport, setViewport] = useState({
     latitude: 52.19,
@@ -29,6 +33,8 @@ const VehicleMap = () => {
         setViewport(viewport);
       }}
     >
+      <NavigationControl />
+      <ScaleControl className={styles.scaleControl} />
       <Pins data={vehicleData} setSelectedVehicle={setSelectedVehicle} />
 
       {selectedVehicle ? (

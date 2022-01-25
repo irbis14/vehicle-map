@@ -10,6 +10,7 @@ const Pins = ({ data, setSelectedVehicle }) => {
         key={item.id}
         latitude={item.location.latitude}
         longitude={item.location.longitude}
+        scale={5}
       >
         <button
           className={styles.iconBox}

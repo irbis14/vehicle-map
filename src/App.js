@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-
 import VehicleMap from "./Components/VehicleMap";
 // import * as mapData from "./fetchApi.json";
 import { RevolvingDot } from "react-loader-spinner";

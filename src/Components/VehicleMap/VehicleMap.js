@@ -1,32 +1,30 @@
 import { useState, useRef } from "react";
-import ReactMapGL, {
-  NavigationControl,
-  ScaleControl,
-  Layer,
-} from "react-map-gl";
-import * as mapData from "../../fetchApi.json";
-// import marker from "../../image/marker.svg";
-// import marker from "../../image/car.svg";
+import ReactMapGL, { NavigationControl, ScaleControl } from "react-map-gl";
+import * as fetchedData from "../../fetchApi.json";
+import Filter from "../Filter/Filter";
 import Pins from "../Pins";
 
 import styles from "./VehicleMap.module.css";
 
-const vehicleData = mapData;
-
-const setMapCenter = (data) => {
-  const latitudeSum = data.objects.reduce((acc, item, index, array) => {
-    return acc + item.location.latitude;
-  }, 0);
-  const longitudeSum = data.objects.reduce((acc, item, index, array) => {
-    return acc + item.location.longitude;
-  }, 0);
-  return {
-    latitude: latitudeSum / data.objects.length,
-    longitude: longitudeSum / data.objects.length,
-  };
-};
+const mapData = fetchedData;
+const vehicleData = mapData.objects;
 
 const VehicleMap = () => {
+  const [type, setType] = useState(null);
+
+  const setMapCenter = (data) => {
+    const latitudeSum = data.reduce((acc, item) => {
+      return acc + item.location.latitude;
+    }, 0);
+    const longitudeSum = data.reduce((acc, item) => {
+      return acc + item.location.longitude;
+    }, 0);
+    return {
+      latitude: latitudeSum / data.length,
+      longitude: longitudeSum / data.length,
+    };
+  };
+
   const mapCenter = setMapCenter(vehicleData);
   const [viewport, setViewport] = useState({
     ...mapCenter,
@@ -37,24 +35,40 @@ const VehicleMap = () => {
   const mapRef = useRef();
 
   return (
-    <ReactMapGL
-      {...viewport}
-      mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
-      mapStyle="mapbox://styles/irbis14/ckyvqk8gl004415phia5ztuxp"
-      onViewportChange={(viewport) => {
-        setViewport(viewport);
-      }}
-      ref={mapRef}
-    >
-      <NavigationControl />
-      <ScaleControl className={styles.scaleControl} />
-      <Pins
-        mapRef={mapRef}
-        data={vehicleData}
-        viewport={viewport}
-        setViewport={setViewport}
-      />
-    </ReactMapGL>
+    <>
+      {vehicleData ? (
+        <ReactMapGL
+          {...viewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAP_TOKEN}
+          mapStyle="mapbox://styles/irbis14/ckyvqk8gl004415phia5ztuxp"
+          onViewportChange={(viewport) => {
+            setViewport(viewport);
+          }}
+          ref={mapRef}
+        >
+          <NavigationControl />
+          <ScaleControl className={styles.scaleControl} />
+          {}
+          <Pins
+            key={1}
+            mapRef={mapRef}
+            data={
+              type
+                ? vehicleData.filter(
+                    (item) =>
+                      item.type === type.value ||
+                      item.status === type.value ||
+                      item.promotion === type.value
+                  )
+                : vehicleData
+            }
+            viewport={viewport}
+            setViewport={setViewport}
+          />
+        </ReactMapGL>
+      ) : null}
+      <Filter setType={setType} />
+    </>
   );
 };
 

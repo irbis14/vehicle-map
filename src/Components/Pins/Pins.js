@@ -1,7 +1,6 @@
 import { FlyToInterpolator, Marker } from "react-map-gl";
 import { useState } from "react/cjs/react.development";
 import useSupercluster from "use-supercluster";
-// import marker from "../../image/marker.svg";
 import marker from "../../image/car.svg";
 import PinPopup from "../PinPopup/PinPopup";
 import styles from "./Pins.module.css";
@@ -9,7 +8,7 @@ import styles from "./Pins.module.css";
 const Pins = ({ mapRef, data, viewport, setViewport }) => {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
 
-  const points = data.objects.map((item) => ({
+  const points = data.map((item) => ({
     type: "Feature",
     properties: {
       cluster: false,
@@ -98,58 +97,10 @@ const Pins = ({ mapRef, data, viewport, setViewport }) => {
             selectedVehicle={selectedVehicle}
             setSelectedVehicle={setSelectedVehicle}
           />
-        ) : /*  <Popup
-            key={selectedVehicle.vehicleId}
-            anchor="right"
-            latitude={selectedVehicle.location.latitude}
-            longitude={selectedVehicle.location.longitude}
-            onClose={(e) => {
-              setSelectedVehicle(null);
-            }}
-          >
-            <VehicleDescr
-              selectedVehicle={selectedVehicle}
-              setSelectedVehicle={setSelectedVehicle}
-            />
-          </Popup> */
-        null}
+        ) : null}
       </>
     );
   });
 };
 
 export default Pins;
-
-/* export const vehicleLayer = {
-  id: "vehicles",
-  type: "symbol",
-  source: "vehicles",
-  //   filter: ["has", "point_count"],
-  //   iconImage:
-};
-
-export const clusterCountLayer = {
-  id: "cluster-count",
-  type: "symbol",
-  source: "earthquakes",
-  filter: ["has", "point_count"],
-  layout: {
-    "text-field": "{point_count_abbreviated}",
-    "text-font": ["DIN Offc Pro Medium", "Arial Unicode MS Bold"],
-    "text-size": 12,
-  },
-};
-
-export const unclusteredPointLayer = {
-  id: "unclustered-point",
-  type: "circle",
-  source: "earthquakes",
-  filter: ["!", ["has", "point_count"]],
-  paint: {
-    "circle-color": "#11b4da",
-    "circle-radius": 4,
-    "circle-stroke-width": 1,
-    "circle-stroke-color": "#fff",
-  },
-};
- */

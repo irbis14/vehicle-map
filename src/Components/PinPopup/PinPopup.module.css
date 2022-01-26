@@ -1,0 +1,16 @@
+.popupBox {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.popupTitle {
+  font-size: 20px;
+}
+
+.popupText {
+  font-size: 16px;
+}
+
+.popupText span {
+  color: rgb(30, 123, 126);
+}

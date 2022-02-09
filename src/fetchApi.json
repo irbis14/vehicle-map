@@ -79,7 +79,7 @@
         "contentType": null
       },
       "rangeKm": 193,
-      "batteryLevelPct": 98,
+      "batteryLevelPct": 23,
       "reservationEnd": null,
       "reservation": null,
       "status": "AVAILABLE",
@@ -96,6 +96,39 @@
       "location": {
         "latitude": 52.193891367697,
         "longitude": 20.930564789789
+      },
+      "metadata": null
+    },
+    {
+      "discriminator": "vehicle",
+      "platesNumber": "WZPC001",
+      "sideNumber": "Z4-PCAR-01",
+      "color": "White",
+      "type": "CAR",
+      "picture": {
+        "id": "61133b4c-2e9b-4da9-b22c-009baad8eadd",
+        "name": "61133b4c-2e9b-4da9-b22c-009baad8eadd",
+        "extension": null,
+        "contentType": null
+      },
+      "rangeKm": 193,
+      "batteryLevelPct": 70,
+      "reservationEnd": null,
+      "reservation": null,
+      "status": "UNAVAILABLE",
+      "locationDescription": null,
+      "address": null,
+      "mapColor": {
+        "rgb": "ffffff",
+        "alpha": 0.5
+      },
+      "promotion": null,
+      "id": "00000000-0000-0000-0005-000000000005",
+      "name": "Enigma Python Car",
+      "description": null,
+      "location": {
+        "latitude": 52.193991367697,
+        "longitude": 20.940264789789
       },
       "metadata": null
     }

@@ -57,7 +57,8 @@ const VehicleMap = () => {
                 ? vehicleData.filter(
                     (item) =>
                       item.type === type.value ||
-                      item.status === type.value ||
+                      (item.batteryLevelPct < type.value[0] &&
+                        item.batteryLevelPct > type.value[1]) ||
                       item.promotion === type.value
                   )
                 : vehicleData
